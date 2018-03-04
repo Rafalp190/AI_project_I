@@ -51,3 +51,15 @@ def rgb_to_int(rgb_arr) :
 		return 'G'
 	else :
 		return '-'
+
+def int_to_rgb(int_code) :
+	if int_code == "W" :
+		return [0, 0, 0]
+	elif int_code == '-' :
+		return [255, 255, 255]
+	elif int_code == 'S' :
+		return [255, 0, 0]
+	elif int_code == 'G' :
+		return [0, 255, 0]
+	elif int_code == '+' :
+		return [255, 0, 255]
