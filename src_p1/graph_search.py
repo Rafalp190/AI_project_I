@@ -15,7 +15,11 @@ def generic_graph_search(problem, remove_choice):
 
 	while True:
 		if len(frontier):
+			#print(len(frontier))
 			path = remove_choice(frontier, problem)
+			if path == None:
+				return False
+			#print(problem.in_matrix)
 	#		print("path")
 			#print(path)
 			s = path[-1]
@@ -29,24 +33,27 @@ def generic_graph_search(problem, remove_choice):
 			#print(problem.actions(s))
 			#print(problem.in_matrix)
 
-			if problem.actions(s):
-				for a in problem.actions(s):
+			
+			for a in problem.actions(s):
 				
-					result = problem.result(s,a)
-					#print("result")
-					#print(result)
-					
-					if result not in explored:
-						#print("in hereee")
-						new_path = []
-						new_path.extend(path)
+				result = problem.result(s,a)
+				#print("result")
+				#print(result)
+				#count = 0
+				if result not in explored:
+					#print("it checks")
+					#count +=1
+					#print("in hereee")
+					#print(count)
+					new_path = []
+					new_path.extend(path)
 						#print(new_path)
-						new_path.append(problem.result(s, a))
+					new_path.append(problem.result(s, a))
 						#print(new_path)
-						frontier.append(new_path)
+					frontier.append(new_path)
+				
 
-			else:
-				return False
+
 		else:
 			return False
 			
@@ -57,9 +64,13 @@ def depth_first_search_criteria(frontier, problem):
 
 	if len(frontier) == 1 : 
 		path = frontier[0]
+		frontier.remove(path)
 	else :
 		path = frontier[-1]
 		frontier.remove(path)
+		for i in frontier:
+			if i[-1] == path[-1]:
+				frontier.remove(i)
 
 	return path
 
@@ -69,10 +80,13 @@ def depth_first_search_criteria(frontier, problem):
 def breadth_first_search_criteria(frontier, problem):
 	if len(frontier) == 1 : 
 		path = frontier[0]
-	else :
-		path = frontier[1]
 		frontier.remove(path)
-
+	else :
+		path = frontier[0]
+		frontier.remove(path)
+		for i in frontier:
+			if i[-1] == path[-1]:
+				frontier.remove(i)
 	return path
 
 #A* implementation of the remove_choice function
@@ -83,8 +97,11 @@ def breadth_first_search_criteria(frontier, problem):
 def a_star1_search_criteria(frontier, problem):
 	if len(frontier) == 1:
 		path = frontier[0]
+		frontier.remove(path)
 	else : 
 		where_out = np.where(problem.in_matrix == "G")
+		if len(where_out[0]) == 0:
+			return None
 		goal_coords = []
 		min_dist = 100000000
 		min_path = []
@@ -100,7 +117,9 @@ def a_star1_search_criteria(frontier, problem):
 					min_path = i
 		path = min_path
 		frontier.remove(path)
-
+		for i in frontier:
+			if i[-1] == path[-1]:
+				frontier.remove(i)
 	return path
 #A* implementation of the remove_choice function
 #Chooses a path based on a heuristic function
@@ -111,8 +130,11 @@ def a_star1_search_criteria(frontier, problem):
 def a_star2_search_criteria(frontier, problem):
 	if len(frontier) == 1:
 		path = frontier[0]
+		frontier.remove(path)
 	else : 
 		where_out = np.where(problem.in_matrix == "G")
+		if len(where_out[0]) == 0:
+			return None
 		goal_coords = []
 		min_dist = 100000000
 		min_path = []
@@ -128,8 +150,11 @@ def a_star2_search_criteria(frontier, problem):
 					min_dist = dist
 					min_path = i
 		path = min_path
+		#print(path)
 		frontier.remove(path)
-
+		for i in frontier:
+			if i[-1] == path[-1]:
+				frontier.remove(i)
 	return path
 
 		

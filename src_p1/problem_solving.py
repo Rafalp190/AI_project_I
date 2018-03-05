@@ -83,7 +83,7 @@ class Problem(AbstractProblem) :
 		"""Returns a new state after performing an action"""
 		x = s[0]
 		y = s[1] 
-		#self.in_matrix[x,y] = '+'
+		#self.in_matrix[x,y] = '.'
 		if a == 'down' :
 			return (x + 1, y) 
 		elif a == 'up' :

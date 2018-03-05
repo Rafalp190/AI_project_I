@@ -2,6 +2,7 @@ from scipy import misc, stats
 import numpy as np 
 from operator import add
 from functools import reduce
+from PIL import Image
 
 #Function: Image to Matrix
 #Convert a generic PNG or BMP into a numpy RGB ndarray
@@ -45,14 +46,15 @@ def rgb_to_int(rgb_arr) :
 		return "W"
 	elif int(np.mean(rgb_arr)) >= 200 :
 		return '-'
-	elif rgb_arr[0] > 200  and rgb_arr[1] < 200 and rgb_arr[2] < 200 :	
+	elif rgb_arr[0] >= 200  and rgb_arr[1] <= 50 and rgb_arr[2] <= 50:	
 		return 'S'
-	elif rgb_arr[0] < 200  and rgb_arr[1] > 100 and rgb_arr[2] < 200 :	
+	elif rgb_arr[0] <= 50  and rgb_arr[1] >= 200 and rgb_arr[2] <= 50 :	
 		return 'G'
 	else :
 		return '-'
 
 def int_to_rgb(int_code) :
+	#print(int_code)
 	if int_code == "W" :
 		return [0, 0, 0]
 	elif int_code == '-' :
@@ -63,3 +65,32 @@ def int_to_rgb(int_code) :
 		return [0, 255, 0]
 	elif int_code == '+' :
 		return [255, 0, 255]
+
+
+def repaint_image(in_matrix, dimms) :
+	#print(in_matrix.flatten().tolist()[0])
+	
+	rgb_mat = list(map(int_to_rgb, in_matrix.flatten().tolist()[0]))
+	expanded_rgb_mat = []
+	for i in rgb_mat:
+		#print(i)
+		
+		arr = np.repeat(i, 100)
+		arr = np.reshape(arr, (10,10,3))
+		
+		print(arr)
+		print("lone")
+		expanded_rgb_mat.append(arr)
+	#expanded_rgb_mat = np.reshape(expanded_rgb_mat,(dimms*100,dimms*100,3))
+	#print(expanded_rgb_mat[0][0])
+	#expanded_rgb_mat = np.vstack(expanded_rgb_mat)
+	#expanded_rgb_mat = np.hstack(expanded_rgb_mat)
+	#print(expanded_rgb_mat[0][0])
+	#expanded_rgb_mat = np.reshape(expanded_rgb_mat, (dimms*100,dimms*100,3))
+	print(np.shape(expanded_rgb_mat))
+	
+
+	return expanded_rgb_mat
+	#print(np.shape(image_array))
+
+	

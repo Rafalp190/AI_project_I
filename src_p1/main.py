@@ -44,14 +44,24 @@ while executor:
 			print("\nDepth First Search execution")
 			print("________________________________")
 			print("Path to solution:")
-			print(dfs)
-			for i in dfs[1:-1]:
-				x = i[0]
-				y = i[1]
-				problem1.in_matrix[x,y] = '+'
-			print('PATH COST: ')
-			print(problem1.path_cost(dfs))
-			print("________________________________\n")
+			if dfs == False:
+				print("Couldn't find solution")
+				print("________________________________\n")
+				
+			else:
+				print(dfs)
+				for i in dfs[1:-1]:
+					x = i[0]
+					y = i[1]
+					problem1.in_matrix[x,y] = '+'
+				print('PATH COST: ')
+				print(problem1.path_cost(dfs))
+				print("________________________________\n")
+				np.savetxt('solution.txt', problem1.in_matrix, fmt="%s")
+				f = open('solution.txt', "r")
+				text = f.readlines()
+				f.close()
+				eg.codebox("Solution of Depth First Search Algorithm", "Search Algorithm", text)
 
 	elif option == "2" :
 		img = eg.fileopenbox()
@@ -78,14 +88,24 @@ while executor:
 			print("\nBreadth First Search execution\n")
 			print("________________________________")
 			print("Path to solution:")
-			print(bfs)
-			for i in dfs[1:-1]:
-				x = i[0]
-				y = i[1]
-				problem1.in_matrix[x,y] = '+'
-			print('PATH COST: ')
-			print(problem1.path_cost(bfs))
-			print("________________________________\n")
+			if bfs == False:
+				print("Couldn't find solution")
+				print("________________________________\n")
+				
+			else:
+				print(bfs)
+				for i in bfs[1:-1]:
+					x = i[0]
+					y = i[1]
+					problem1.in_matrix[x,y] = '+'
+				print('PATH COST: ')
+				print(problem1.path_cost(bfs))
+				print("________________________________\n")
+				np.savetxt('solution.txt', problem1.in_matrix, fmt="%s")
+				f = open('solution.txt', "r")
+				text = f.readlines()
+				f.close()
+				eg.codebox("Solution of Breadth First Search Algorithm", "Search Algorithm", text)
 
 	elif option == "3" :
 		img = eg.fileopenbox()
@@ -112,14 +132,23 @@ while executor:
 			print("\nA*: Hypotenuse Heuristic execution\n")
 			print("________________________________")
 			print("Path to solution:")
-			print(as1s)
-			for i in dfs[1:-1]:
-				x = i[0]
-				y = i[1]
-				problem1.in_matrix[x,y] = '+'
-			print('PATH COST: ')
-			print(problem1.path_cost(as1s))
-			print("________________________________\n")
+			if as1s == False:
+				print("Couldn't find solution")
+				print("________________________________\n")
+			else:
+				print(as1s)
+				for i in as1s[1:-1]:
+					x = i[0]
+					y = i[1]
+					problem1.in_matrix[x,y] = '+'
+				print('PATH COST: ')
+				print(problem1.path_cost(as1s))
+				print("________________________________\n")
+				np.savetxt('solution.txt', problem1.in_matrix, fmt="%s")
+				f = open('solution.txt', "r")
+				text = f.readlines()
+				f.close()
+				eg.codebox("Solution of A*: Hypotenuse Heuristic Search Algorithm", "Search Algorithm", text)
 
 	elif option == "4" :
 		img = eg.fileopenbox()
@@ -144,19 +173,29 @@ while executor:
 		else :
 			problem1 = Problem(splt_arr)
 			as2s = generic_graph_search(problem1, a_star2_search_criteria)
-			print("\nA*: Hypotenuse Heuristic execution\n")
+			print("\nA*: Sum of Cathetus Heuristic execution\n")
 			print("________________________________")
 			print("Path to solution:")
-			print(as2s)
-			for i in dfs[1:-1]:
-				x = i[0]
-				y = i[1]
-				problem1.in_matrix[x,y] = '+'
-			print('PATH COST: ')
-			print(problem1.path_cost(as2s))
-			print("________________________________\n")
+			if as2s == False:
+				print("Couldn't find solution")
+				print("________________________________\n")
+				
+			else:
+				print(as2s)
+				for i in as2s[1:-1]:
+					x = i[0]
+					y = i[1]
+					problem1.in_matrix[x,y] = '+'
+				print('PATH COST: ')
+				print(problem1.path_cost(as2s))
+				print("________________________________\n")
+				np.savetxt('solution.txt', problem1.in_matrix, fmt="%s")
+				f = open('solution.txt', "r")
+				text = f.readlines()
+				f.close()
+				eg.codebox("Solution of A*: Sum of Cathetus Heuristic Search Algorithm", "Search Algorithm", text)
 	elif option == "5":
 		print("Adios!")
 		executor = False
 	else:
-		option = input('Insert a valid option: ')
+		print("Insert a valid option")
