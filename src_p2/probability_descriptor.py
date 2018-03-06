@@ -16,8 +16,6 @@ def semantic_check(in_list) :
 
 	print( nw_descr )
 	
-def compact_form(in_list) :
-	return None
 
 
 semantic_check(test_list)
